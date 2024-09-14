@@ -1,9 +1,25 @@
 import express, { json } from "express";
 import users from "./MOCK_DATA.json" assert { type: "json" };
 import fs from "fs";
+import { log } from "console";
 const port = 3000;
 const app = express();
+
+//Middlewares
 app.use(express.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+  req.myUserName = "Gopal.dev";
+  fs.appendFile("log.txt", `\n${Date.now()}: ${req.ip}: ${req.method}: ${req.path}`, (err,  data) => {
+    next();
+  });
+  
+});
+
+app.use((req, res, next) => {
+  console.log("Hello from middleware 2", req.myUserName);
+  next();
+});
 
 //!<==Routes==>
 
@@ -18,6 +34,8 @@ app.get("/users", (req, res) => {
 
 //List all users
 app.get("/api/users", (req, res) => {
+  console.log(`My name is ${req.myUserName}`);
+
   res.send(users);
 });
 
