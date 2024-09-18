@@ -1,5 +1,6 @@
 const express = require("express")
 const URL = require("../models/url")
+const userModel = require("../models/user")
 const router = express.Router()
 
 router.get("/", async (req, res) => {
@@ -10,6 +11,12 @@ router.get("/", async (req, res) => {
         linksNumber: lt
     })
 })
+
+
+router.get("/signup", (req, res) =>{
+    return res.render("signup")
+})
+
 
 
 module.exports = router

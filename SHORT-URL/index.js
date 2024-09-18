@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const urlRoutes = require("./routes/urlRoutes");
 const staticRoutes = require("./routes/staticRoutes");
+const userRoutes = require("./routes/userRoutes")
 const { connectToMongoDB } = require("./connect");
 const URLModel = require("./models/url");
 const port = 3000;
@@ -15,6 +16,8 @@ connectToMongoDB("mongodb://127.0.0.1:27017/short-url").then(() =>
   console.log("Connected to MongoDB")
 );
 
+//!<Routes/>
+app.use("/user", userRoutes)
 app.use("/url", urlRoutes);
 app.use("/", staticRoutes);
 
