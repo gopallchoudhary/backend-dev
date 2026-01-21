@@ -20,7 +20,7 @@ async function getAnalytics(req, res) {
   const shortId = req.params.shortId;
   const result = await URLModel.findOne({ shortId: shortId });
   return res.json({
-    totalClicks: result.visitHistory.length,
+      otalClicks: result.visitHistory.length,
     analytics: result.visitHistory,
   });
 }

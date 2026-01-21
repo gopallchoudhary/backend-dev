@@ -4,6 +4,7 @@ const urlRoutes = require("./routes/urlRoutes");
 const staticRoutes = require("./routes/staticRoutes");
 const userRoutes = require("./routes/userRoutes")
 const { connectToMongoDB } = require("./connect");
+const cookieParser = require('cookie-parser')
 const URLModel = require("./models/url");
 const port = 3000;
 const app = express();
@@ -11,6 +12,7 @@ app.use(express.json());
 app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser())
 
 connectToMongoDB("mongodb://127.0.0.1:27017/short-url").then(() =>
   console.log("Connected to MongoDB")
